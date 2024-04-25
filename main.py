@@ -22,7 +22,7 @@ buffer.seek(0)
 binary_data = buffer.getvalue()
 
 # Desired chunk size in bytes (approximately 25 megabytes)
-chunk_size_bits = 24 * 3840 * 2160
+chunk_size_bits = 24 * 640 * 320
 px_chunk_size_bits = 24
 
 # Initialize variables
@@ -68,3 +68,4 @@ print(f"Chunk {i + 1}: {len(chunk)} bits")
 # conv each pixel to video here
 #for px in px_chunks:
 
+# add reverse

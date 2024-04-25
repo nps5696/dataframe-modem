@@ -3,8 +3,8 @@ import numpy as np
 
 def get_df():
     # Define the number of rows and columns to generate
-    num_rows = 10  # 1 million rows
-    num_cols = 10      # 100 columns
+    num_rows = 100000  # 1 million rows
+    num_cols = 100     # 100 columns
 
     # Create a DataFrame with random data
     data = np.random.rand(num_rows, num_cols)
