@@ -31,7 +31,7 @@ current_chunk = []
 chunks = []
 
 # Dimensions for video frames
-frame_height =  type_caster.frame_height
+frame_height = type_caster.frame_height
 frame_width = type_caster.frame_width
 frame_size = frame_height * frame_width * 3  # 3 bytes per pixel for RGB
 
