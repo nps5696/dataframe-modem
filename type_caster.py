@@ -42,8 +42,8 @@ def color_to_bits(color):
 
 # Generate frames and save them as images
 num_frames = 100  # Number of frames for the video
-frame_width = 640  # Width of each frame (4K resolution)
-frame_height = 320  # Height of each frame (4K resolution)
+frame_width = 640  # Width of each frame
+frame_height = 320  # Height of each frame
 fps = 30  # Frames per second
 
 # Define the output video file

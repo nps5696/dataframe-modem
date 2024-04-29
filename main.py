@@ -6,13 +6,6 @@ import gen_df
 import type_caster
 
 
-# # Load or create your DataFrame here
-# # For demonstration, let's create a sample DataFrame with 10000 rows and 10 columns
-# df = pd.DataFrame({'A': range(10000), 'B': range(10000), 'C': range(10000),
-#                    'D': range(10000), 'E': range(10000), 'F': range(10000),
-#                    'G': range(10000), 'H': range(10000), 'I': range(10000),
-#                    'J': range(10000)})
-
 # get df from df generator
 df = gen_df.get_df()
 # Convert DataFrame to CSV string
@@ -39,9 +32,6 @@ chunks = []
 # Dimensions for video frames
 frame_height = type_caster.frame_height
 frame_width = type_caster.frame_width
-frame_size = frame_height * frame_width * 3  # 3 bytes per pixel for RGB
-
-
 
 # Split the binary data into chunks
 chunks = [binary_data[i:i+chunk_size_bits] for i in range(0, len(binary_data), chunk_size_bits)]
@@ -69,8 +59,6 @@ print("Created Video successfully")
 # Do something with each chunk (e.g., process it, save it to a file)
 print(f"Chunk {i + 1}: {len(chunk)} bits")
 
-# px_chunks = [binary_data[i:i + px_chunk_size_bits] for i in range(0, len(binary_data), px_chunk_size_bits)]
-
 # Decode video back into the Dataframe
 
 # Read video
@@ -88,9 +76,6 @@ while True:
     if not ret:
         break
     # Convert each frame to binary data
-    # assuming the px values in the video frames are in the same format as encoded (RGB or BGR)
-    # frame_binary = frame.flatten().tobytes()
-    # binary_data.extend(frame_binary)
     for row in frame:
         for pixel in row:
             B, G, R = pixel
@@ -98,13 +83,6 @@ while True:
             binary_data.append(G)
             binary_data.append(R)
 cap.release()
-
-# # Convert  binary data back to a dataframe
-# buffer = io.BytesIO(binary_data)
-# buffer.seek(0)
-# df_restored = pd.read_pickle(buffer)
-# print(df_restored.head())   # df is too large. show only head
-
 
 # Convert binary data to a NumPy array
 array_data = np.frombuffer(binary_data, dtype=np.uint8)
@@ -118,27 +96,6 @@ df_restored = pd.DataFrame(array_data)
 
 print(df_restored.head())
 
-# # Convert binary data to a NumPy array
-# array_data = np.frombuffer(binary_data, dtype=np.uint8)
-#
-# # Reshape the array to match the original DataFrame shape
-# num_rows = len(binary_data) // (3 * len(df.columns))
-# array_data = array_data.reshape(num_rows, 3 * len(df.columns))
-#
-# # Create a DataFrame from the reshaped array
-# df_restored = pd.DataFrame(array_data)
-#
-# # Rearrange the DataFrame to display RGB values as sets of three
-# num_rows, num_cols = df_restored.shape
-# num_rgb_sets = num_cols // 3
-#
-# df_rgb = pd.DataFrame(columns=['Pixel_{}'.format(i) for i in range(num_rgb_sets)])
-#
-# for i in range(num_rgb_sets):
-#     rgb_set = df_restored.iloc[:, i*3:(i*3)+3].values.tolist()
-#     df_rgb['Pixel_{}'.format(i)] = rgb_set
-#
-# print(df_rgb)
 
 
 
